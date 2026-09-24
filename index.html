@@ -91,6 +91,15 @@ nav.scrolled{border-bottom-color:var(--line-hi)}
 .nav-cta{font-family:JetBrains Mono,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(76,201,240,.3);padding:8px 16px;border-radius:6px;transition:all .2s}
 .nav-cta:hover{background:rgba(76,201,240,.1);border-color:rgba(76,201,240,.55)}
 .burger{display:none;background:none;border:0;color:var(--ink);cursor:pointer;padding:6px}
+.burger span{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0;transition:transform .25s,opacity .25s}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mmenu{position:fixed;top:66px;left:0;right:0;background:rgba(7,14,26,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-hi);display:none;flex-direction:column;padding:8px 28px 18px;z-index:49}
+.mmenu.open{display:flex}
+.mmenu a{padding:13px 4px;color:var(--muted);border-bottom:1px solid var(--line);font-size:15px;transition:color .2s}
+.mmenu a:last-child{border-bottom:0}
+.mmenu a:hover{color:var(--ink)}
 @media(max-width:880px){.nav-links{display:none}.burger{display:block}}
 
 /* ============ BUTTONS ============ */
@@ -265,7 +274,18 @@ footer{border-top:1px solid var(--line);padding:44px 0 40px;background:rgba(7,14
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu">
+      <span></span><span></span><span></span>
+    </button>
     <a class="nav-cta" href="#contact">Start a Scan</a>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#visibility">Visibility</a>
+    <a href="#infrastructure">IT &amp; Cloud</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -461,6 +481,22 @@ footer{border-top:1px solid var(--line);padding:44px 0 40px;background:rgba(7,14
   var nav = document.getElementById("nav");
   var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 8); };
   window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  /* mobile burger menu */
+  var burger = document.getElementById("burger");
+  var mmenu = document.getElementById("mmenu");
+  if (burger && mmenu) {
+    var setMenu = function(open){
+      burger.classList.toggle("open", open);
+      mmenu.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    burger.addEventListener("click", function(){ setMenu(!mmenu.classList.contains("open")); });
+    mmenu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ setMenu(false); }); });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
+    window.addEventListener("resize", function(){ if (window.innerWidth > 880) setMenu(false); });
+  }
 
   /* spotlight follows cursor */
   var spot = document.querySelector(".spotlight");
