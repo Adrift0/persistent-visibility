@@ -233,6 +233,10 @@ canvas#radar{width:100%;display:block;border-radius:8px}
 .layer li{font-size:13.5px;color:var(--muted);display:flex;gap:9px;align-items:baseline}
 .layer li::before{content:"▸";color:var(--cyan);font-size:11px}
 .stack-plus{display:flex;align-items:center;justify-content:center;font-family:Sora;font-size:30px;font-weight:800;color:var(--cyan);text-shadow:0 0 24px rgba(76,201,240,.5);padding:0 4px;animation:pulse-plus 2.6s ease-in-out infinite}
+.stack-left{display:flex;flex-direction:column;gap:14px}
+.stack-diagram{border:1px solid var(--line-hi);border-radius:10px;background:linear-gradient(180deg,rgba(14,27,48,.55),rgba(10,19,34,.35));padding:18px;display:flex;align-items:center;justify-content:center}
+.stack-diagram svg{width:100%;height:100%;max-height:620px}
+@media(max-width:880px){.stack-diagram svg{max-height:440px}}
 @keyframes pulse-plus{50%{transform:scale(1.18);opacity:.7}}
 .stack-eq{margin-top:22px;border:1px solid rgba(76,201,240,.3);border-radius:10px;padding:20px 26px;text-align:center;background:rgba(30,111,255,.06);font-family:Sora;font-weight:700;font-size:17px}
 .stack-eq .mono{display:block;font-size:10.5px;color:var(--cyan);letter-spacing:.22em;margin-bottom:8px;font-weight:400}
@@ -435,18 +439,81 @@ footer{border-top:1px solid var(--line);padding:44px 0 40px;background:rgba(7,14
       <h2>Two practices. One compounding system.</h2>
     </div>
     <div class="stack reveal">
-      <div class="layer">
-        <span class="mono">SURFACE</span>
-        <h3>Visibility Layer</h3>
-        <p>Where customers find you and decide.</p>
-        <ul><li>SEO &amp; content</li><li>Google Business Profile</li><li>AI-search presence</li><li>Website &amp; conversion</li></ul>
+      <div class="stack-left">
+        <div class="layer">
+          <span class="mono">SURFACE</span>
+          <h3>Visibility Layer</h3>
+          <p>Where customers find you and decide.</p>
+          <ul><li>SEO &amp; content</li><li>Google Business Profile</li><li>AI-search presence</li><li>Website &amp; conversion</li></ul>
+        </div>
+        <div class="stack-plus" aria-hidden="true">+</div>
+        <div class="layer">
+          <span class="mono">FOUNDATION</span>
+          <h3>Infrastructure Layer</h3>
+          <p>What everything stands on.</p>
+          <ul><li>M365 &amp; identity</li><li>Hybrid → cloud domains</li><li>Zero-trust security</li><li>Governance &amp; reliability</li></ul>
+        </div>
       </div>
-      <div class="stack-plus" aria-hidden="true">+</div>
-      <div class="layer">
-        <span class="mono">FOUNDATION</span>
-        <h3>Infrastructure Layer</h3>
-        <p>What everything stands on.</p>
-        <ul><li>M365 &amp; identity</li><li>Hybrid → cloud domains</li><li>Zero-trust security</li><li>Governance &amp; reliability</li></ul>
+      <div class="stack-diagram" aria-label="Diagram: the visibility layer stacked on the infrastructure layer, signals radiating upward as advantage compounds">
+        <svg viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg" role="img">
+          <defs>
+            <filter id="pglow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <linearGradient id="visg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(30,111,255,.22)"/>
+              <stop offset="1" stop-color="rgba(10,19,34,.18)"/>
+            </linearGradient>
+          </defs>
+
+          <!-- signal arcs radiating from the visibility slab -->
+          <g stroke="#4CC9F0" fill="none" filter="url(#pglow)" stroke-linecap="round">
+            <path d="M168 226 A 58 58 0 0 1 252 226" stroke-width="2" opacity=".9"/>
+            <path d="M140 226 A 90 90 0 0 1 280 226" stroke-width="1.5" opacity=".5"/>
+            <path d="M112 226 A 122 122 0 0 1 308 226" stroke-width="1.1" opacity=".28"/>
+          </g>
+          <circle cx="210" cy="188" r="3" fill="#8FBFFF" filter="url(#pglow)"/>
+          <circle cx="163" cy="210" r="2.4" fill="#4CC9F0" opacity=".85"/>
+          <circle cx="257" cy="210" r="2.4" fill="#4CC9F0" opacity=".85"/>
+
+          <!-- visibility slab -->
+          <rect x="50" y="252" width="320" height="110" rx="12" fill="url(#visg)" stroke="rgba(76,201,240,.55)" stroke-width="1.2"/>
+          <text x="74" y="280" font-family="'JetBrains Mono',monospace" font-size="10.5" letter-spacing="2" fill="#4CC9F0">SURFACE · SIGNAL</text>
+          <text x="74" y="306" font-family="Sora,sans-serif" font-weight="700" font-size="17" fill="#EAF1FB">Visibility Layer</text>
+          <text x="74" y="328" font-family="Inter,sans-serif" font-size="12.5" fill="#8CA3C0">Search, maps, AI answers, conversion</text>
+          <text x="74" y="348" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8FBFFF">SEO · GBP · AI · WEB</text>
+          <circle cx="210" cy="252" r="4.5" fill="#1E6FFF" filter="url(#pglow)"/>
+
+          <!-- connectors -->
+          <g stroke="rgba(140,163,192,.35)" stroke-dasharray="2 5" stroke-width="1.2">
+            <line x1="90" y1="362" x2="90" y2="400"/><line x1="150" y1="362" x2="150" y2="400"/>
+            <line x1="210" y1="362" x2="210" y2="400"/><line x1="270" y1="362" x2="270" y2="400"/>
+            <line x1="330" y1="362" x2="330" y2="400"/>
+          </g>
+          <g fill="#4CC9F0" opacity=".8">
+            <circle cx="90" cy="362" r="2.4"/><circle cx="150" cy="362" r="2.4"/><circle cx="210" cy="362" r="2.4"/>
+            <circle cx="270" cy="362" r="2.4"/><circle cx="330" cy="362" r="2.4"/>
+            <circle cx="90" cy="400" r="2.4"/><circle cx="150" cy="400" r="2.4"/><circle cx="210" cy="400" r="2.4"/>
+            <circle cx="270" cy="400" r="2.4"/><circle cx="330" cy="400" r="2.4"/>
+          </g>
+
+          <!-- infrastructure slab -->
+          <rect x="50" y="400" width="320" height="110" rx="12" fill="rgba(14,27,48,.75)" stroke="rgba(140,163,192,.32)" stroke-width="1.2"/>
+          <text x="74" y="428" font-family="'JetBrains Mono',monospace" font-size="10.5" letter-spacing="2" fill="#8CA3C0">FOUNDATION · STRUCTURE</text>
+          <text x="74" y="454" font-family="Sora,sans-serif" font-weight="700" font-size="17" fill="#EAF1FB">Infrastructure Layer</text>
+          <text x="74" y="476" font-family="Inter,sans-serif" font-size="12.5" fill="#8CA3C0">Identity, cloud, security, governance</text>
+          <text x="74" y="496" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8FBFFF">M365 · ENTRA · AZURE · ZERO-TRUST</text>
+
+          <!-- compounding arrow -->
+          <path d="M368 506 C 382 430, 388 340, 398 208" stroke="#1E6FFF" stroke-width="2" fill="none" stroke-dasharray="7 6" stroke-linecap="round"/>
+          <path d="M398 196 L 390 214 L 406 214 Z" fill="#1E6FFF"/>
+          <text x="336" y="176" font-family="'JetBrains Mono',monospace" font-size="10.5" letter-spacing="1.5" fill="#8FBFFF" text-anchor="end">ADVANTAGE</text>
+          <text x="336" y="192" font-family="'JetBrains Mono',monospace" font-size="10.5" letter-spacing="1.5" fill="#8FBFFF" text-anchor="end">COMPOUNDS</text>
+
+          <!-- caption -->
+          <text x="210" y="544" font-family="'JetBrains Mono',monospace" font-size="10.5" letter-spacing="1.2" fill="#8CA3C0" text-anchor="middle">Visibility radiates from infrastructure that holds.</text>
+        </svg>
       </div>
     </div>
     <div class="stack-eq reveal"><span class="mono">The compounding equation</span>Lasting competitive advantage: visibility that stands on infrastructure that never fails.</div>
